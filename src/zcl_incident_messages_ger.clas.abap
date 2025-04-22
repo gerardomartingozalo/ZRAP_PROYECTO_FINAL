@@ -11,10 +11,10 @@ CLASS zcl_incident_messages_ger DEFINITION
     INTERFACES if_abap_behv_message .
 
     CONSTANTS:
-      gc_msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_LGL',
+      gc_msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_GER',
 
       BEGIN OF status_invalid,
-        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_LGL',
+        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_GER',
         msgno TYPE symsgno VALUE '005',
         attr1 TYPE scx_attrname VALUE 'MV_STATUS',
         attr2 TYPE scx_attrname VALUE '',
@@ -23,7 +23,7 @@ CLASS zcl_incident_messages_ger DEFINITION
       END OF status_invalid,
 
       BEGIN OF customer_unkown,
-        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_LGL',
+        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_GER',
         msgno TYPE symsgno VALUE '001',
         attr1 TYPE scx_attrname VALUE 'MV_CUSTOMER_ID',
         attr2 TYPE scx_attrname VALUE '',
@@ -32,7 +32,7 @@ CLASS zcl_incident_messages_ger DEFINITION
       END OF customer_unkown,
 
       BEGIN OF agency_unkown,
-        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_LGL',
+        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_GER',
         msgno TYPE symsgno VALUE '002',
         attr1 TYPE scx_attrname VALUE 'MV_AGENCY_ID',
         attr2 TYPE scx_attrname VALUE '',
@@ -41,7 +41,7 @@ CLASS zcl_incident_messages_ger DEFINITION
       END OF agency_unkown,
 
       BEGIN OF begin_date_bef_end_date,
-        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_LGL',
+        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_GER',
         msgno TYPE symsgno VALUE '003',
         attr1 TYPE scx_attrname VALUE 'MV_BEGIN_DATE',
         attr2 TYPE scx_attrname VALUE 'MV_END_DATE',
@@ -50,7 +50,7 @@ CLASS zcl_incident_messages_ger DEFINITION
       END OF begin_date_bef_end_date,
 
       BEGIN OF begin_date_on_or_bef_sysdate,
-        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_LGL',
+        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_GER',
         msgno TYPE symsgno VALUE '004',
         attr1 TYPE scx_attrname VALUE 'MV_BEGIN_DATE',
         attr2 TYPE scx_attrname VALUE '',
@@ -59,7 +59,7 @@ CLASS zcl_incident_messages_ger DEFINITION
       END OF begin_date_on_or_bef_sysdate,
 
       BEGIN OF discount_invalid,
-        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_LGL',
+        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_GER',
         msgno TYPE symsgno VALUE '006',
         attr1 TYPE scx_attrname VALUE '',
         attr2 TYPE scx_attrname VALUE '',
@@ -68,7 +68,7 @@ CLASS zcl_incident_messages_ger DEFINITION
       END OF discount_invalid,
 
       BEGIN OF enter_begin_date,
-        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_LGL',
+        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_GER',
         msgno TYPE symsgno VALUE '007',
         attr1 TYPE scx_attrname VALUE '',
         attr2 TYPE scx_attrname VALUE '',
@@ -77,7 +77,7 @@ CLASS zcl_incident_messages_ger DEFINITION
       END OF enter_begin_date,
 
       BEGIN OF enter_end_date,
-        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_LGL',
+        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_GER',
         msgno TYPE symsgno VALUE '008',
         attr1 TYPE scx_attrname VALUE '',
         attr2 TYPE scx_attrname VALUE '',
@@ -86,7 +86,7 @@ CLASS zcl_incident_messages_ger DEFINITION
       END OF enter_end_date,
 
       BEGIN OF enter_agency_id,
-        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_LGL',
+        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_GER',
         msgno TYPE symsgno VALUE '009',
         attr1 TYPE scx_attrname VALUE '',
         attr2 TYPE scx_attrname VALUE '',
@@ -95,7 +95,7 @@ CLASS zcl_incident_messages_ger DEFINITION
       END OF enter_agency_id,
 
       BEGIN OF enter_customer_id,
-        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_LGL',
+        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_GER',
         msgno TYPE symsgno VALUE '010',
         attr1 TYPE scx_attrname VALUE '',
         attr2 TYPE scx_attrname VALUE '',
@@ -104,7 +104,7 @@ CLASS zcl_incident_messages_ger DEFINITION
       END OF enter_customer_id,
 
       BEGIN OF enter_connection_id,
-        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_LGL',
+        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_GER',
         msgno TYPE symsgno VALUE '011',
         attr1 TYPE scx_attrname VALUE '',
         attr2 TYPE scx_attrname VALUE '',
@@ -113,7 +113,7 @@ CLASS zcl_incident_messages_ger DEFINITION
       END OF enter_connection_id,
 
       BEGIN OF no_flight_exists,
-        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_LGL',
+        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_GER',
         msgno TYPE symsgno VALUE '012',
         attr1 TYPE scx_attrname VALUE 'MV_CARRIER_ID',
         attr2 TYPE scx_attrname VALUE 'MV_FLIGHT_DATE',
@@ -122,7 +122,7 @@ CLASS zcl_incident_messages_ger DEFINITION
       END OF no_flight_exists,
 
       BEGIN OF supplement_unknown,
-        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_LGL',
+        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_GER',
         msgno TYPE symsgno VALUE '013',
         attr1 TYPE scx_attrname VALUE '',
         attr2 TYPE scx_attrname VALUE '',
@@ -131,7 +131,7 @@ CLASS zcl_incident_messages_ger DEFINITION
       END OF supplement_unknown,
 
       BEGIN OF enter_supplement_id,
-        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_LGL',
+        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_GER',
         msgno TYPE symsgno VALUE '014',
         attr1 TYPE scx_attrname VALUE '',
         attr2 TYPE scx_attrname VALUE '',
@@ -140,7 +140,7 @@ CLASS zcl_incident_messages_ger DEFINITION
       END OF enter_supplement_id,
 
       BEGIN OF enter_airline_id,
-        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_LGL',
+        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_GER',
         msgno TYPE symsgno VALUE '016',
         attr1 TYPE scx_attrname VALUE '',
         attr2 TYPE scx_attrname VALUE '',
@@ -149,7 +149,7 @@ CLASS zcl_incident_messages_ger DEFINITION
       END OF enter_airline_id,
 
       BEGIN OF enter_flight_date,
-        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_LGL',
+        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_GER',
         msgno TYPE symsgno VALUE '017',
         attr1 TYPE scx_attrname VALUE '',
         attr2 TYPE scx_attrname VALUE '',
@@ -158,7 +158,7 @@ CLASS zcl_incident_messages_ger DEFINITION
       END OF enter_flight_date,
 
       BEGIN OF not_sufficient_numbers,
-        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_LGL',
+        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_GER',
         msgno TYPE symsgno VALUE '018',
         attr1 TYPE scx_attrname VALUE '',
         attr2 TYPE scx_attrname VALUE '',
@@ -167,7 +167,7 @@ CLASS zcl_incident_messages_ger DEFINITION
       END OF not_sufficient_numbers,
 
       BEGIN OF number_range_depleted,
-        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_LGL',
+        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_GER',
         msgno TYPE symsgno VALUE '019',
         attr1 TYPE scx_attrname VALUE '',
         attr2 TYPE scx_attrname VALUE '',
@@ -176,7 +176,7 @@ CLASS zcl_incident_messages_ger DEFINITION
       END OF number_range_depleted,
 
       BEGIN OF not_authorized,
-        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_LGL',
+        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_GER',
         msgno TYPE symsgno VALUE '020',
         attr1 TYPE scx_attrname VALUE '',
         attr2 TYPE scx_attrname VALUE '',
@@ -185,7 +185,7 @@ CLASS zcl_incident_messages_ger DEFINITION
       END OF not_authorized,
 
       BEGIN OF not_authorized_for_agencyID,
-        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_LGL',
+        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_GER',
         msgno TYPE symsgno VALUE '021',
         attr1 TYPE scx_attrname VALUE '',
         attr2 TYPE scx_attrname VALUE '',
@@ -194,7 +194,7 @@ CLASS zcl_incident_messages_ger DEFINITION
       END OF not_authorized_for_agencyID,
 
       BEGIN OF currency_required,
-        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_LGL',
+        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_GER',
         msgno TYPE symsgno VALUE '022',
         attr1 TYPE scx_attrname VALUE '',
         attr2 TYPE scx_attrname VALUE '',
@@ -203,7 +203,7 @@ CLASS zcl_incident_messages_ger DEFINITION
       END OF currency_required,
 
       BEGIN OF currency_not_existing,
-        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_LGL',
+        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_GER',
         msgno TYPE symsgno VALUE '023',
         attr1 TYPE scx_attrname VALUE 'MV_CURRENCY_CODE',
         attr2 TYPE scx_attrname VALUE '',
@@ -212,7 +212,7 @@ CLASS zcl_incident_messages_ger DEFINITION
       END OF currency_not_existing,
 
       BEGIN OF booking_fee_invalid,
-        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_LGL',
+        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_GER',
         msgno TYPE symsgno VALUE '024',
         attr1 TYPE scx_attrname VALUE '',
         attr2 TYPE scx_attrname VALUE '',
@@ -221,7 +221,7 @@ CLASS zcl_incident_messages_ger DEFINITION
       END OF booking_fee_invalid,
 
       BEGIN OF flight_price_invalid,
-        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_LGL',
+        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_GER',
         msgno TYPE symsgno VALUE '025',
         attr1 TYPE scx_attrname VALUE '',
         attr2 TYPE scx_attrname VALUE '',
@@ -230,7 +230,7 @@ CLASS zcl_incident_messages_ger DEFINITION
       END OF flight_price_invalid,
 
       BEGIN OF suppl_price_invalid,
-        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_LGL',
+        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_GER',
         msgno TYPE symsgno VALUE '026',
         attr1 TYPE scx_attrname VALUE '',
         attr2 TYPE scx_attrname VALUE '',

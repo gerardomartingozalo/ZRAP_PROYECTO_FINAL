@@ -59,7 +59,7 @@ annotate entity Z_C_INCTP_GER
   Description;
 
   @Consumption.valueHelpDefinition: [ {
-    entity.name: 'zdd_status_vh_lgl',
+    entity.name: 'zdd_status_vh_ger',
     entity.element: 'StatusCode',
     useForValidation: true
   } ]
@@ -70,7 +70,7 @@ annotate entity Z_C_INCTP_GER
   Status;
 
   @Consumption.valueHelpDefinition: [ {
-    entity.name: 'zdd_priority_vh_lgl',
+    entity.name: 'zdd_priority_vh_ger',
     entity.element: 'PriorityCode',
     useForValidation: true
   } ]
