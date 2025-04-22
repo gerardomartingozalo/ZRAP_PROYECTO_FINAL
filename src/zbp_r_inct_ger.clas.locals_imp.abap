@@ -2,12 +2,12 @@ CLASS lhc_Incident DEFINITION INHERITING FROM cl_abap_behavior_handler.
   PRIVATE SECTION.
 
     CONSTANTS: BEGIN OF mc_status,
-                 open        TYPE zde_status2_lgl VALUE 'OP',
-                 in_progress TYPE zde_status2_lgl VALUE 'IP',
-                 pending     TYPE zde_status2_lgl VALUE 'PE',
-                 completed   TYPE zde_status2_lgl VALUE 'CO',
-                 closed      TYPE zde_status2_lgl VALUE 'CL',
-                 canceled    TYPE zde_status2_lgl VALUE 'CN',
+                 open        TYPE zde_status_i_ger VALUE 'OP',
+                 in_progress TYPE zde_status_i_ger VALUE 'IP',
+                 pending     TYPE zde_status_i_ger VALUE 'PE',
+                 completed   TYPE zde_status_i_ger VALUE 'CO',
+                 closed      TYPE zde_status_i_ger VALUE 'CL',
+                 canceled    TYPE zde_status_i_ger VALUE 'CN',
                END OF mc_status.
 
     METHODS get_instance_features FOR INSTANCE FEATURES
@@ -32,7 +32,7 @@ CLASS lhc_Incident DEFINITION INHERITING FROM cl_abap_behavior_handler.
       IMPORTING keys FOR Incident~setDefaultHistory.
 
     METHODS get_history_index EXPORTING ev_incuuid      TYPE sysuuid_x16
-                              RETURNING VALUE(rv_index) TYPE zde_his_id_lgl.
+                              RETURNING VALUE(rv_index) TYPE zde_his_id_ger.
 
 ENDCLASS.
 
@@ -50,7 +50,7 @@ CLASS lhc_Incident IMPLEMENTATION.
 
   METHOD get_instance_features.
 
-    DATA lv_history_index TYPE zde_his_id_lgl.
+    DATA lv_history_index TYPE zde_his_id_ger.
 
     READ ENTITIES OF z_r_inct_ger IN LOCAL MODE
        ENTITY Incident
@@ -97,13 +97,13 @@ CLASS lhc_Incident IMPLEMENTATION.
 * Declaration of necessary variables
     DATA: lt_updated_root_entity TYPE TABLE FOR UPDATE z_r_inct_ger,
           lt_association_entity  TYPE TABLE FOR CREATE z_r_inct_ger\_History,
-          lv_status              TYPE zde_status2_lgl,
-          lv_text                TYPE zde_text_lgl,
+          lv_status              TYPE zde_status_i_ger,
+          lv_text                TYPE zde_text_ger,
           lv_exception           TYPE string,
           lv_error               TYPE c,
-          ls_incident_history    TYPE zdt_inct_h_lgl,
-          lv_max_his_id          TYPE zde_his_id_lgl,
-          lv_wrong_status        TYPE zde_status2_lgl.
+          ls_incident_history    TYPE zdt_inct_h_ger,
+          lv_max_his_id          TYPE zde_his_id_ger,
+          lv_wrong_status        TYPE zde_status_i_ger.
 
 ** Iterate through the keys records to get parameters for validations
     READ ENTITIES OF z_r_inct_ger IN LOCAL MODE
@@ -126,7 +126,7 @@ CLASS lhc_Incident IMPLEMENTATION.
         lv_wrong_status = lv_status.
 * Customize error messages
         APPEND VALUE #( %tky = <incident>-%tky
-                        %msg = NEW zcl_incident_messages_lgl( textid = zcl_incident_messages_lgl=>status_invalid
+                        %msg = NEW zcl_incident_messages_ger( textid = zcl_incident_messages_ger=>status_invalid
                                                             status = lv_wrong_status
                                                             severity = if_abap_behv_message=>severity-error )
                         %state_area = 'VALIDATE_COMPONENT'
@@ -223,7 +223,7 @@ CLASS lhc_Incident IMPLEMENTATION.
           lt_association_entity  TYPE TABLE FOR CREATE z_r_inct_ger\_History,
           lv_exception           TYPE string,
           ls_incident_history    TYPE zdt_inct_h_ger,
-          lv_max_his_id          TYPE zde_his_id_lgl.
+          lv_max_his_id          TYPE zde_his_id_ger.
 
 ** Iterate through the keys records to get parameters for validations
     READ ENTITIES OF z_r_inct_ger IN LOCAL MODE
