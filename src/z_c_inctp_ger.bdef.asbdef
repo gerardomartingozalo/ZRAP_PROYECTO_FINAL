@@ -1,0 +1,31 @@
+projection;
+strict ( 2 );
+use draft;
+use side effects;
+
+define behavior for Z_C_INCTP_GER alias Incident
+use etag
+{
+  use create;
+  use update;
+  use delete;
+
+  use action changeStatus;
+
+  use action Activate;
+  use action Discard;
+  use action Edit;
+  use action Resume;
+  use action Prepare;
+
+  use association _History { create; with draft; }
+}
+
+define behavior for Z_C_INCTP_H_GER alias History
+use etag
+{
+  //use update;
+  //use delete;
+
+  use association _Incident { with draft; }
+}
