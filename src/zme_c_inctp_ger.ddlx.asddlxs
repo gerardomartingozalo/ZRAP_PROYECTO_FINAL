@@ -49,7 +49,7 @@ annotate entity Z_C_INCTP_GER
                importance: #LOW }],
   identification: [{ position: 30  } ] }
 //  selectionField: [{ position: 30 }]
-//  @UI.hidden: true
+
   Title;
 
   @UI: {lineItem: [{ position: 40,
@@ -92,6 +92,16 @@ annotate entity Z_C_INCTP_GER
   selectionField: [{ position: 80 }]}
   ChangedDate;
 
+  @UI: {lineItem: [{ position: 81,
+               importance: #LOW,
+               label: 'Responsible' }],
+  identification: [{ position: 81 ,
+                     label: 'Responsible' } ]}
+//  selectionField: [{ position: 81 }]
+
+  Responsible;
+  
+  
   @UI: {lineItem: [{ position: 90,
                importance: #LOW }],
   identification: [{ position: 90  } ],

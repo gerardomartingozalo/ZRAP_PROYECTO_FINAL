@@ -13,6 +13,7 @@ define root view entity Z_I_INCTP_GER
       Priority,
       CreationDate,
       ChangedDate,
+      Responsible,                
       LocalCreatedBy,
       LocalCreatedAt,
       LocalLastChangedBy,

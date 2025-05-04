@@ -21,6 +21,7 @@ authorization master ( global, instance )
   Status,
   CreationDate,
   ChangedDate,
+  Responsible,
   LocalCreatedBy,
   LocalCreatedAt,
   LocalLastChangedBy,
@@ -72,6 +73,7 @@ authorization master ( global, instance )
       Priority           = priority;
       CreationDate       = creation_date;
       ChangedDate        = changed_date;
+      Responsible        = responsible;
       LocalCreatedBy     = local_created_by;
       LocalCreatedAt     = local_created_at;
       LocalLastChangedBy = local_last_changed_by;

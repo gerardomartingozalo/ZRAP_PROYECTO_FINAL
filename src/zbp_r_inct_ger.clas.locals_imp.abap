@@ -59,6 +59,7 @@ CLASS lhc_Incident IMPLEMENTATION.
 
   METHOD get_instance_features.
 
+
     DATA lv_history_index TYPE zde_his_id_ger.
 
 
@@ -95,34 +96,81 @@ CLASS lhc_Incident IMPLEMENTATION.
                           ) ).
 
 
-
-*solo habilitamos el boton de Change Status si es el ADMIN
+*solo habilitamos el boton de Change Status si es el ADMIN o responsable
     DATA(lv_technical_name) = cl_abap_context_info=>get_user_technical_name( ).
 
-    IF requested_features-%action-ChangeStatus  = if_abap_behv=>mk-on AND lv_technical_name <> 'CB9980002772'.
 
-      READ ENTITIES OF z_r_inct_ger IN LOCAL MODE
-         ENTITY Incident
-           FIELDS ( Status )
-           WITH CORRESPONDING #( keys )
-         RESULT DATA(incidents1)
-         FAILED failed.
-
-      result = VALUE #( FOR incident IN incidents1
-                             ( %tky                   = incident-%tky
-                               %action-ChangeStatus   = if_abap_behv=>fc-o-disabled )
-                             ).
-
-    ENDIF.
+    READ ENTITIES OF z_r_inct_ger IN LOCAL MODE
+       ENTITY Incident
+         FIELDS ( Status Responsible )
+         WITH CORRESPONDING #( keys )
+       RESULT DATA(incidents1)
+       FAILED failed.
 
 
+    LOOP AT incidents1 INTO DATA(ls_incidents1).
+      IF  requested_features-%action-ChangeStatus = if_abap_behv=>mk-on AND ls_incidents1-Responsible <> lv_technical_name AND lv_technical_name <> 'ADMIN'.
+
+        result = VALUE #( FOR incident IN incidents1
+                               ( %tky                   = incident-%tky
+                                 %action-ChangeStatus   = if_abap_behv=>fc-o-disabled )
+                               ).
+      else.
+              result = VALUE #( FOR incident IN incidents1
+                               ( %tky                   = incident-%tky
+                                 %action-ChangeStatus   = if_abap_behv=>fc-o-enabled )
+                               ).
+
+          exit.
+
+      ENDIF.
+    ENDLOOP.
   ENDMETHOD.
 
   METHOD get_instance_authorizations.
 
+*    " Solo verificamos autorizaciones si se solicita actualizar
+*    IF requested_authorizations-%update = if_abap_behv=>mk-on.
+*      " Obtener el usuario actual del sistema
+*      DATA(lv_current_user) = cl_abap_context_info=>get_user_technical_name( ).
+*      " Verificar si es administrador
+*      DATA(lv_is_admin) = xsdbool( lv_current_user = 'ADMIN' ).
+*
+*      " Leer datos de las incidencias para verificar el usuario asignado
+*      READ ENTITIES OF z_r_inct_ger IN LOCAL MODE
+*        ENTITY Incident
+*        FIELDS ( Responsible )
+*        WITH CORRESPONDING #( keys )
+*        RESULT DATA(incidents)
+*        FAILED failed.
+*
+*      " Verificar autorización para cada incidencia
+*      LOOP AT incidents INTO DATA(incident).
+*        " ¿Es administrador o el responsable asignado a la incidencia?
+*        IF lv_is_admin = abap_true OR incident-Responsible = lv_current_user.
+*          APPEND VALUE #( %tky = incident-%tky
+*                          %update = if_abap_behv=>auth-allowed ) TO result.
+*        ELSE.
+*          APPEND VALUE #( %tky = incident-%tky
+*                          %update = if_abap_behv=>auth-unauthorized ) TO result.
+*        ENDIF.
+*      ENDLOOP.
+*    ELSE.
+*      " Para otras operaciones permitir acceso
+*      LOOP AT keys ASSIGNING FIELD-SYMBOL(<key>).
+*        APPEND VALUE #( %tky = <key>-%tky
+*                        %update = if_abap_behv=>auth-allowed ) TO result.
+*      ENDLOOP.
+*    ENDIF.
+
+
   ENDMETHOD.
 
   METHOD get_global_authorizations.
+
+
+
+
   ENDMETHOD.
 
   METHOD changeStatus.
@@ -168,11 +216,21 @@ CLASS lhc_Incident IMPLEMENTATION.
         EXIT.
       ENDIF.
 
-      APPEND VALUE #( %tky = <incident>-%tky
-                      ChangedDate = cl_abap_context_info=>get_system_date( )
-                      Status = lv_status
-                      Description = 'RESPONSIBLE'
-                      ) TO lt_updated_root_entity.
+      "Si el estatus es IN PROGRESS asignamos un responsable
+      "Este responsable sera a partir de ese momento el unico que puede modificar el estatus o el ADMIN
+      IF lv_status EQ mc_status-in_progress.
+        APPEND VALUE #( %tky = <incident>-%tky
+                        ChangedDate = cl_abap_context_info=>get_system_date( )
+                        Status = lv_status
+                        Responsible = cl_abap_context_info=>get_user_technical_name( )
+                        ) TO lt_updated_root_entity.
+
+      ELSE.
+        APPEND VALUE #( %tky = <incident>-%tky
+                        ChangedDate = cl_abap_context_info=>get_system_date( )
+                        Status = lv_status
+                        ) TO lt_updated_root_entity.
+      ENDIF.
 
 ** Obtenemos el Texto del formulario
       lv_text = keys[ KEY id %tky = <incident>-%tky ]-%param-text.
@@ -224,7 +282,7 @@ CLASS lhc_Incident IMPLEMENTATION.
     ENTITY Incident
     UPDATE  FIELDS ( ChangedDate
                      Status
-                     Description )
+                     Responsible )
     WITH lt_updated_root_entity.
 
     FREE incidents. " Free entries in incidents
