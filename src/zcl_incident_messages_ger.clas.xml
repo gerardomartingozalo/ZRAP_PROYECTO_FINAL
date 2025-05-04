@@ -5,7 +5,7 @@
    <VSEOCLASS>
     <CLSNAME>ZCL_INCIDENT_MESSAGES_GER</CLSNAME>
     <LANGU>E</LANGU>
-    <DESCRIPT>Flight Reference Scenario: Message Exception Class</DESCRIPT>
+    <DESCRIPT>Message Exception Class</DESCRIPT>
     <CATEGORY>40</CATEGORY>
     <STATE>1</STATE>
     <CLSCCINCL>X</CLSCCINCL>

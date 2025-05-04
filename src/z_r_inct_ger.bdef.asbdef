@@ -19,6 +19,7 @@ authorization master ( global, instance )
   IncUUID,
   IncidentID,
   Status,
+  CreationDate,
   ChangedDate,
   LocalCreatedBy,
   LocalCreatedAt,
@@ -35,7 +36,7 @@ authorization master ( global, instance )
    Priority;
 
   action ( features : instance, authorization : update ) changeStatus
-    parameter zdd_change_status_param_lgl result [1] $self;
+    parameter zdd_change_status_param_ger result [1] $self;
 
   side effects { action changeStatus affects $self; }
 
@@ -45,11 +46,21 @@ authorization master ( global, instance )
 
   determination setDefaultValues on modify { create; }
 
+  validation validateMandatoryFields on save { create; field Title; }
+  validation validateMandatoryDescription on save { create; field Description; }
+  validation validateMandatoryPriority on save { create; field Priority; }
+
+//  determine action validateTitle { validation validateMandatoryFields; }
+
   draft action Activate optimized;
   draft action Discard;
   draft action Edit;
   draft action Resume;
-  draft determine action Prepare;
+//  draft determine action Prepare;
+  draft determine action Prepare
+    {
+//    validation validateMandatoryFields;
+  }
 
   mapping for zdt_inct_ger
     {

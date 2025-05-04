@@ -22,222 +22,32 @@ CLASS zcl_incident_messages_ger DEFINITION
         attr4 TYPE scx_attrname VALUE '',
       END OF status_invalid,
 
-      BEGIN OF customer_unkown,
+      BEGIN OF mandatory_Title,
         msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_GER',
         msgno TYPE symsgno VALUE '001',
-        attr1 TYPE scx_attrname VALUE 'MV_CUSTOMER_ID',
+        attr1 TYPE scx_attrname VALUE 'MV_FIELD',
         attr2 TYPE scx_attrname VALUE '',
         attr3 TYPE scx_attrname VALUE '',
         attr4 TYPE scx_attrname VALUE '',
-      END OF customer_unkown,
+      END OF mandatory_Title,
 
-      BEGIN OF agency_unkown,
+      BEGIN OF mandatory_Description,
         msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_GER',
         msgno TYPE symsgno VALUE '002',
-        attr1 TYPE scx_attrname VALUE 'MV_AGENCY_ID',
+        attr1 TYPE scx_attrname VALUE 'MV_FIELD',
         attr2 TYPE scx_attrname VALUE '',
         attr3 TYPE scx_attrname VALUE '',
         attr4 TYPE scx_attrname VALUE '',
-      END OF agency_unkown,
+      END OF mandatory_Description,
 
-      BEGIN OF begin_date_bef_end_date,
+      BEGIN OF mandatory_Priority,
         msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_GER',
         msgno TYPE symsgno VALUE '003',
-        attr1 TYPE scx_attrname VALUE 'MV_BEGIN_DATE',
-        attr2 TYPE scx_attrname VALUE 'MV_END_DATE',
-        attr3 TYPE scx_attrname VALUE '',
-        attr4 TYPE scx_attrname VALUE '',
-      END OF begin_date_bef_end_date,
-
-      BEGIN OF begin_date_on_or_bef_sysdate,
-        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_GER',
-        msgno TYPE symsgno VALUE '004',
-        attr1 TYPE scx_attrname VALUE 'MV_BEGIN_DATE',
+        attr1 TYPE scx_attrname VALUE 'MV_FIELD',
         attr2 TYPE scx_attrname VALUE '',
         attr3 TYPE scx_attrname VALUE '',
         attr4 TYPE scx_attrname VALUE '',
-      END OF begin_date_on_or_bef_sysdate,
-
-      BEGIN OF discount_invalid,
-        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_GER',
-        msgno TYPE symsgno VALUE '006',
-        attr1 TYPE scx_attrname VALUE '',
-        attr2 TYPE scx_attrname VALUE '',
-        attr3 TYPE scx_attrname VALUE '',
-        attr4 TYPE scx_attrname VALUE '',
-      END OF discount_invalid,
-
-      BEGIN OF enter_begin_date,
-        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_GER',
-        msgno TYPE symsgno VALUE '007',
-        attr1 TYPE scx_attrname VALUE '',
-        attr2 TYPE scx_attrname VALUE '',
-        attr3 TYPE scx_attrname VALUE '',
-        attr4 TYPE scx_attrname VALUE '',
-      END OF enter_begin_date,
-
-      BEGIN OF enter_end_date,
-        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_GER',
-        msgno TYPE symsgno VALUE '008',
-        attr1 TYPE scx_attrname VALUE '',
-        attr2 TYPE scx_attrname VALUE '',
-        attr3 TYPE scx_attrname VALUE '',
-        attr4 TYPE scx_attrname VALUE '',
-      END OF enter_end_date,
-
-      BEGIN OF enter_agency_id,
-        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_GER',
-        msgno TYPE symsgno VALUE '009',
-        attr1 TYPE scx_attrname VALUE '',
-        attr2 TYPE scx_attrname VALUE '',
-        attr3 TYPE scx_attrname VALUE '',
-        attr4 TYPE scx_attrname VALUE '',
-      END OF enter_agency_id,
-
-      BEGIN OF enter_customer_id,
-        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_GER',
-        msgno TYPE symsgno VALUE '010',
-        attr1 TYPE scx_attrname VALUE '',
-        attr2 TYPE scx_attrname VALUE '',
-        attr3 TYPE scx_attrname VALUE '',
-        attr4 TYPE scx_attrname VALUE '',
-      END OF enter_customer_id,
-
-      BEGIN OF enter_connection_id,
-        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_GER',
-        msgno TYPE symsgno VALUE '011',
-        attr1 TYPE scx_attrname VALUE '',
-        attr2 TYPE scx_attrname VALUE '',
-        attr3 TYPE scx_attrname VALUE '',
-        attr4 TYPE scx_attrname VALUE '',
-      END OF enter_connection_id,
-
-      BEGIN OF no_flight_exists,
-        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_GER',
-        msgno TYPE symsgno VALUE '012',
-        attr1 TYPE scx_attrname VALUE 'MV_CARRIER_ID',
-        attr2 TYPE scx_attrname VALUE 'MV_FLIGHT_DATE',
-        attr3 TYPE scx_attrname VALUE '',
-        attr4 TYPE scx_attrname VALUE '',
-      END OF no_flight_exists,
-
-      BEGIN OF supplement_unknown,
-        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_GER',
-        msgno TYPE symsgno VALUE '013',
-        attr1 TYPE scx_attrname VALUE '',
-        attr2 TYPE scx_attrname VALUE '',
-        attr3 TYPE scx_attrname VALUE '',
-        attr4 TYPE scx_attrname VALUE '',
-      END OF supplement_unknown,
-
-      BEGIN OF enter_supplement_id,
-        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_GER',
-        msgno TYPE symsgno VALUE '014',
-        attr1 TYPE scx_attrname VALUE '',
-        attr2 TYPE scx_attrname VALUE '',
-        attr3 TYPE scx_attrname VALUE '',
-        attr4 TYPE scx_attrname VALUE '',
-      END OF enter_supplement_id,
-
-      BEGIN OF enter_airline_id,
-        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_GER',
-        msgno TYPE symsgno VALUE '016',
-        attr1 TYPE scx_attrname VALUE '',
-        attr2 TYPE scx_attrname VALUE '',
-        attr3 TYPE scx_attrname VALUE '',
-        attr4 TYPE scx_attrname VALUE '',
-      END OF enter_airline_id,
-
-      BEGIN OF enter_flight_date,
-        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_GER',
-        msgno TYPE symsgno VALUE '017',
-        attr1 TYPE scx_attrname VALUE '',
-        attr2 TYPE scx_attrname VALUE '',
-        attr3 TYPE scx_attrname VALUE '',
-        attr4 TYPE scx_attrname VALUE '',
-      END OF enter_flight_date,
-
-      BEGIN OF not_sufficient_numbers,
-        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_GER',
-        msgno TYPE symsgno VALUE '018',
-        attr1 TYPE scx_attrname VALUE '',
-        attr2 TYPE scx_attrname VALUE '',
-        attr3 TYPE scx_attrname VALUE '',
-        attr4 TYPE scx_attrname VALUE '',
-      END OF not_sufficient_numbers,
-
-      BEGIN OF number_range_depleted,
-        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_GER',
-        msgno TYPE symsgno VALUE '019',
-        attr1 TYPE scx_attrname VALUE '',
-        attr2 TYPE scx_attrname VALUE '',
-        attr3 TYPE scx_attrname VALUE '',
-        attr4 TYPE scx_attrname VALUE '',
-      END OF number_range_depleted,
-
-      BEGIN OF not_authorized,
-        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_GER',
-        msgno TYPE symsgno VALUE '020',
-        attr1 TYPE scx_attrname VALUE '',
-        attr2 TYPE scx_attrname VALUE '',
-        attr3 TYPE scx_attrname VALUE '',
-        attr4 TYPE scx_attrname VALUE '',
-      END OF not_authorized,
-
-      BEGIN OF not_authorized_for_agencyID,
-        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_GER',
-        msgno TYPE symsgno VALUE '021',
-        attr1 TYPE scx_attrname VALUE '',
-        attr2 TYPE scx_attrname VALUE '',
-        attr3 TYPE scx_attrname VALUE '',
-        attr4 TYPE scx_attrname VALUE '',
-      END OF not_authorized_for_agencyID,
-
-      BEGIN OF currency_required,
-        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_GER',
-        msgno TYPE symsgno VALUE '022',
-        attr1 TYPE scx_attrname VALUE '',
-        attr2 TYPE scx_attrname VALUE '',
-        attr3 TYPE scx_attrname VALUE '',
-        attr4 TYPE scx_attrname VALUE '',
-      END OF currency_required,
-
-      BEGIN OF currency_not_existing,
-        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_GER',
-        msgno TYPE symsgno VALUE '023',
-        attr1 TYPE scx_attrname VALUE 'MV_CURRENCY_CODE',
-        attr2 TYPE scx_attrname VALUE '',
-        attr3 TYPE scx_attrname VALUE '',
-        attr4 TYPE scx_attrname VALUE '',
-      END OF currency_not_existing,
-
-      BEGIN OF booking_fee_invalid,
-        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_GER',
-        msgno TYPE symsgno VALUE '024',
-        attr1 TYPE scx_attrname VALUE '',
-        attr2 TYPE scx_attrname VALUE '',
-        attr3 TYPE scx_attrname VALUE '',
-        attr4 TYPE scx_attrname VALUE '',
-      END OF booking_fee_invalid,
-
-      BEGIN OF flight_price_invalid,
-        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_GER',
-        msgno TYPE symsgno VALUE '025',
-        attr1 TYPE scx_attrname VALUE '',
-        attr2 TYPE scx_attrname VALUE '',
-        attr3 TYPE scx_attrname VALUE '',
-        attr4 TYPE scx_attrname VALUE '',
-      END OF flight_price_invalid,
-
-      BEGIN OF suppl_price_invalid,
-        msgid TYPE symsgid VALUE 'ZMC_INCT_MESSAGE_GER',
-        msgno TYPE symsgno VALUE '026',
-        attr1 TYPE scx_attrname VALUE '',
-        attr2 TYPE scx_attrname VALUE '',
-        attr3 TYPE scx_attrname VALUE '',
-        attr4 TYPE scx_attrname VALUE '',
-      END OF suppl_price_invalid.
-
+      END OF mandatory_Priority.
 
     METHODS constructor
       IMPORTING
@@ -259,10 +69,11 @@ CLASS zcl_incident_messages_ger DEFINITION
         end_date              TYPE /dmo/end_date OPTIONAL
         booking_date          TYPE /dmo/booking_date OPTIONAL
         flight_date           TYPE /dmo/flight_date OPTIONAL
-        status                TYPE zde_status2_lgl OPTIONAL
+        status                TYPE zde_status_i_ger OPTIONAL
         currency_code         TYPE /dmo/currency_code OPTIONAL
         severity              TYPE if_abap_behv_message=>t_severity OPTIONAL
-        uname                 TYPE syuname OPTIONAL.
+        uname                 TYPE syuname OPTIONAL
+        field                 type string OPTIONAL.
 
 
     DATA:
@@ -282,9 +93,10 @@ CLASS zcl_incident_messages_ger DEFINITION
       mv_end_date              TYPE /dmo/end_date,
       mv_booking_date          TYPE /dmo/booking_date,
       mv_flight_date           TYPE /dmo/flight_date,
-      mv_status                TYPE zde_status2_lgl,
+      mv_status                TYPE zde_status_i_ger,
       mv_currency_code         TYPE /dmo/currency_code,
-      mv_uname                 TYPE syuname.
+      mv_uname                 TYPE syuname,
+      mv_field                 type string.
 
 
   PROTECTED SECTION.
@@ -316,6 +128,7 @@ CLASS zcl_incident_messages_ger IMPLEMENTATION.
     me->mv_status                = status.
     me->mv_currency_code         = currency_code.
     me->mv_uname                 = uname.
+    me->mv_field                 = field.
 
 
     if_abap_behv_message~m_severity = severity.

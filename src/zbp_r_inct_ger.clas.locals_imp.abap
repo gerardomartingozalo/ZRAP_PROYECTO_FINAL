@@ -31,6 +31,15 @@ CLASS lhc_Incident DEFINITION INHERITING FROM cl_abap_behavior_handler.
     METHODS setDefaultHistory FOR DETERMINE ON SAVE
       IMPORTING keys FOR Incident~setDefaultHistory.
 
+    METHODS validateMandatoryFields FOR VALIDATE ON SAVE
+      IMPORTING keys FOR Incident~validateMandatoryFields.
+
+    METHODS validateMandatoryDescription FOR VALIDATE ON SAVE
+      IMPORTING keys FOR Incident~validateMandatoryDescription.
+
+    METHODS validateMandatoryPriority FOR VALIDATE ON SAVE
+      IMPORTING keys FOR Incident~validateMandatoryPriority.
+
     METHODS get_history_index EXPORTING ev_incuuid      TYPE sysuuid_x16
                               RETURNING VALUE(rv_index) TYPE zde_his_id_ger.
 
@@ -51,6 +60,7 @@ CLASS lhc_Incident IMPLEMENTATION.
   METHOD get_instance_features.
 
     DATA lv_history_index TYPE zde_his_id_ger.
+
 
     READ ENTITIES OF z_r_inct_ger IN LOCAL MODE
        ENTITY Incident
@@ -84,9 +94,32 @@ CLASS lhc_Incident IMPLEMENTATION.
                                                             ELSE if_abap_behv=>fc-o-enabled )
                           ) ).
 
+
+
+*solo habilitamos el boton de Change Status si es el ADMIN
+    DATA(lv_technical_name) = cl_abap_context_info=>get_user_technical_name( ).
+
+    IF requested_features-%action-ChangeStatus  = if_abap_behv=>mk-on AND lv_technical_name <> 'CB9980002772'.
+
+      READ ENTITIES OF z_r_inct_ger IN LOCAL MODE
+         ENTITY Incident
+           FIELDS ( Status )
+           WITH CORRESPONDING #( keys )
+         RESULT DATA(incidents1)
+         FAILED failed.
+
+      result = VALUE #( FOR incident IN incidents1
+                             ( %tky                   = incident-%tky
+                               %action-ChangeStatus   = if_abap_behv=>fc-o-disabled )
+                             ).
+
+    ENDIF.
+
+
   ENDMETHOD.
 
   METHOD get_instance_authorizations.
+
   ENDMETHOD.
 
   METHOD get_global_authorizations.
@@ -137,11 +170,14 @@ CLASS lhc_Incident IMPLEMENTATION.
 
       APPEND VALUE #( %tky = <incident>-%tky
                       ChangedDate = cl_abap_context_info=>get_system_date( )
-                      Status = lv_status ) TO lt_updated_root_entity.
+                      Status = lv_status
+                      Description = 'RESPONSIBLE'
+                      ) TO lt_updated_root_entity.
 
-** Get Text
+** Obtenemos el Texto del formulario
       lv_text = keys[ KEY id %tky = <incident>-%tky ]-%param-text.
 
+*incrementamos el ID del historial
       lv_max_his_id = get_history_index(
                   IMPORTING
                     ev_incuuid = <incident>-IncUUID ).
@@ -155,12 +191,14 @@ CLASS lhc_Incident IMPLEMENTATION.
       ls_incident_history-new_status = lv_status.
       ls_incident_history-text = lv_text.
 
+*le asignamos UUID
       TRY.
           ls_incident_history-inc_uuid = cl_system_uuid=>create_uuid_x16_static( ).
         CATCH cx_uuid_error INTO DATA(lo_error).
           lv_exception = lo_error->get_text(  ).
       ENDTRY.
 
+*Creamos la tabla para actualizar la entidad
       IF ls_incident_history-his_id IS NOT INITIAL.
 *
         APPEND VALUE #( %tky = <incident>-%tky
@@ -173,8 +211,11 @@ CLASS lhc_Incident IMPLEMENTATION.
                                                ) TO lt_association_entity.
       ENDIF.
     ENDLOOP.
+
+
     UNASSIGN <incident>.
 
+*Si no hay error
 ** The process is interrupted because a change of status from pending (PE) to Completed (CO) or Closed (CL) is not permitted.
     CHECK lv_error IS INITIAL.
 
@@ -182,7 +223,8 @@ CLASS lhc_Incident IMPLEMENTATION.
     MODIFY ENTITIES OF z_r_inct_ger IN LOCAL MODE
     ENTITY Incident
     UPDATE  FIELDS ( ChangedDate
-                     Status )
+                     Status
+                     Description )
     WITH lt_updated_root_entity.
 
     FREE incidents. " Free entries in incidents
@@ -325,5 +367,102 @@ CLASS lhc_Incident IMPLEMENTATION.
        FROM CORRESPONDING #( keys ).
   ENDMETHOD.
 
+
+  METHOD validateMandatoryFields.
+
+    READ ENTITIES OF z_r_inct_ger IN LOCAL MODE
+     ENTITY Incident
+     FIELDS ( Title Description Priority )
+     WITH CORRESPONDING #( keys )
+     RESULT DATA(incidents).
+*
+*
+    LOOP AT incidents INTO DATA(incident).
+*
+
+      " Validar Title
+      IF incident-Title IS INITIAL.
+
+        APPEND VALUE #( %tky = incident-%tky ) TO failed-incident.
+
+        APPEND VALUE #( %tky = incident-%tky
+                        %msg = NEW zcl_incident_messages_ger(
+                               textid   = zcl_incident_messages_ger=>mandatory_Title
+                               severity = if_abap_behv_message=>severity-error
+                                )
+                        %element-Title = if_abap_behv=>mk-on
+                        %state_area = 'VALIDATE_COMPONENT'
+                      ) TO reported-incident.
+      ENDIF.
+
+    ENDLOOP.
+
+
+
+  ENDMETHOD.
+
+  METHOD validateMandatoryDescription.
+
+    READ ENTITIES OF z_r_inct_ger IN LOCAL MODE
+   ENTITY Incident
+   FIELDS ( Title Description Priority )
+   WITH CORRESPONDING #( keys )
+   RESULT DATA(incidents).
+*
+*
+    LOOP AT incidents INTO DATA(incident).
+*
+
+      " Validar Title
+      IF incident-Description IS INITIAL.
+
+        APPEND VALUE #( %tky = incident-%tky ) TO failed-incident.
+
+        APPEND VALUE #( %tky = incident-%tky
+                        %msg = NEW zcl_incident_messages_ger(
+                               textid   = zcl_incident_messages_ger=>mandatory_Description
+                               severity = if_abap_behv_message=>severity-error
+                                )
+                        %element-Description = if_abap_behv=>mk-on
+                        %state_area = 'VALIDATE_COMPONENT'
+                      ) TO reported-incident.
+      ENDIF.
+
+    ENDLOOP.
+
+
+  ENDMETHOD.
+
+  METHOD validateMandatoryPriority.
+
+    READ ENTITIES OF z_r_inct_ger IN LOCAL MODE
+ ENTITY Incident
+ FIELDS ( Title Description Priority )
+ WITH CORRESPONDING #( keys )
+ RESULT DATA(incidents).
+*
+*
+    LOOP AT incidents INTO DATA(incident).
+*
+
+      " Validar Title
+      IF incident-Priority IS INITIAL.
+
+        APPEND VALUE #( %tky = incident-%tky ) TO failed-incident.
+
+        APPEND VALUE #( %tky = incident-%tky
+                        %msg = NEW zcl_incident_messages_ger(
+                               textid   = zcl_incident_messages_ger=>mandatory_priority
+                               severity = if_abap_behv_message=>severity-error
+                                )
+                        %element-Priority = if_abap_behv=>mk-on
+                        %state_area = 'VALIDATE_COMPONENT'
+                      ) TO reported-incident.
+      ENDIF.
+
+    ENDLOOP.
+
+
+  ENDMETHOD.
 
 ENDCLASS.

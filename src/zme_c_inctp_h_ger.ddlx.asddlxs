@@ -1,11 +1,11 @@
 @Metadata.layer: #CORE
 @UI: { createHidden: true,
        headerInfo: { typeName:       'History',
-                     typeNamePlural: 'Histories',
+                     typeNamePlural: 'Histories.',
                      title:          { type: #STANDARD,
                                        label: 'History',
                                        value: 'HisID' } },
-       presentationVariant: [{ sortOrder: [{ by: 'NewStatus',
+       presentationVariant: [{ sortOrder: [{ by: 'HisID',
                                           direction: #DESC } ],                                          
        visualizations: [{ type: #AS_LINEITEM}]}] }
 annotate entity Z_C_INCTP_H_GER
